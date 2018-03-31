@@ -2,10 +2,10 @@
   "name": "shiori-encode-layer",
   "version": "1.0.0",
   "description": "SHIORI encode converter layer",
-  "main": "./dist/shiori-encode-layer.js",
-  "types": "./dist/shiori-encode-layer.d.ts",
+  "main": "./dist/lib/shiori-encode-layer.js",
+  "types": "./dist/lib/shiori-encode-layer.d.ts",
   "files": [
-    "dist"
+    "dist/lib"
   ],
   "scripts": {
     "prepare": "npm run dist",
