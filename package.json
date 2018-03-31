@@ -1,0 +1,29 @@
+{
+  "name": "shiori-encode-layer",
+  "version": "1.0.0",
+  "description": "SHIORI encode converter layer",
+  "main": "./dist/shiori-encode-layer.js",
+  "types": "./dist/shiori-encode-layer.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepare": "npm run dist",
+    "prepublishOnly": "npm run lint",
+    "dist": "shx rm -rf dist && tsc",
+    "lint": "tslint -p ."
+  },
+  "author": "narazaka",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/encoding-japanese": "^1.0.15",
+    "@types/node": "^9.6.1",
+    "shioriloader": "^2.0.1",
+    "shx": "^0.2.2",
+    "tslint": "^5.9.1",
+    "typescript": "^2.8.1"
+  },
+  "dependencies": {
+    "encoding-japanese": "^1.0.28"
+  }
+}
