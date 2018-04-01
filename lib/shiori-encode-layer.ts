@@ -1,19 +1,26 @@
 import * as Encoding from "encoding-japanese";
 import { Shiori } from "shioriloader";
 
+export interface RawShiori {
+    load(dirpath: string): Promise<number>;
+    request(request: string | Buffer): Promise<string | Buffer>;
+    unload(): Promise<number>;
+}
+
 export class ShioriEncodeLayer implements Shiori {
-    private static encodeRequest(content: string) {
-        const charsetMatch = content.match(/Charset: ([^\x0d\x0a]+)/i);
-        if (!charsetMatch) return content;
-        const charset = charsetMatch[1];
-        return ShioriEncodeLayer.encode(content, charset);
+    private static encodeRequest(content: string | Buffer) {
+        return ShioriEncodeLayer.encode(content, ShioriEncodeLayer.getCharset(content));
     }
 
-    private static decodeResponse(content: string) {
-        const charsetMatch = content.match(/Charset: ([^\x0d\x0a]+)/i);
-        if (!charsetMatch) return content;
-        const charset = charsetMatch[1];
-        return ShioriEncodeLayer.decode(content, charset);
+    private static decodeResponse(content: string | Buffer) {
+        return ShioriEncodeLayer.decode(content, ShioriEncodeLayer.getCharset(content));
+    }
+
+    private static getCharset(content: string | Buffer) {
+        const charsetMatch =
+            (content instanceof Buffer ? content.toString("ascii") : content).match(/Charset: ([^\x0d\x0a]+)/i);
+        const charset = charsetMatch ? charsetMatch[1] : "AUTO";
+        return ShioriEncodeLayer.charsetType(charset);
     }
 
     private static charsetType(charset: string) {
@@ -23,25 +30,25 @@ export class ShioriEncodeLayer implements Shiori {
         return "AUTO";
     }
 
-    private static encode(content: string, charset: string) {
+    private static encode(content: string | Buffer, charset: Encoding.Encoding) {
         return Encoding.convert(content, {
             from: "UNICODE",
-            to: ShioriEncodeLayer.charsetType(charset),
+            to: charset,
             type: "string",
         }) as string;
     }
 
-    private static decode(content: string, charset: string) {
+    private static decode(content: string | Buffer, charset: Encoding.Encoding) {
         return Encoding.convert(content, {
-            from: ShioriEncodeLayer.charsetType(charset),
+            from: charset,
             to: "UNICODE",
             type: "string",
         }) as string;
     }
 
-    childShiori: Shiori;
+    childShiori: RawShiori;
 
-    constructor(shiori: Shiori) {
+    constructor(shiori: RawShiori) {
         this.childShiori = shiori;
     }
 
@@ -53,7 +60,7 @@ export class ShioriEncodeLayer implements Shiori {
         return this.childShiori.unload();
     }
 
-    async request(request: string) {
+    async request(request: string | Buffer) {
         return ShioriEncodeLayer.decodeResponse(
             await this.childShiori.request(
                 ShioriEncodeLayer.encodeRequest(request),
