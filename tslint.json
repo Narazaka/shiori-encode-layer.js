@@ -2,6 +2,7 @@
     "extends": "tslint:recommended",
     "rules": {
         "member-access": false,
-        "curly": false
+        "curly": false,
+        "interface-name": false
     }
 }
