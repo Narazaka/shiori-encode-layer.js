@@ -4,4 +4,4 @@ SHIORI encode converter layer
 
 ## License
 
-This is released under [MIT License](http://narazaka.net/license/MIT?2018).
+This is released under [Zlib License](http://narazaka.net/license/Zlib?2018).
