@@ -1,7 +1,7 @@
 import * as Encoding from "encoding-japanese";
 import * as assert from "power-assert";
 import * as sinon from "sinon";
-import { ShioriEncodeLayer, RawShiori } from "../lib/shiori-encode-layer";
+import { RawShiori, ShioriEncodeLayer } from "../lib/shiori-encode-layer";
 
 const crlf = "\x0d\x0a";
 
@@ -21,7 +21,10 @@ class ChildShiori implements RawShiori {
     async load(_: string) { return 1; }
 
     async request(_: ArrayBuffer) {
-        const val = Encoding.convert(ChildShiori.requestString(this.charset, this.value), {to: "SJIS", from: "UNICODE", type: "array"}) as number[];
+        const val = Encoding.convert(
+            ChildShiori.requestString(this.charset, this.value),
+            {to: "SJIS", from: "UNICODE", type: "array"},
+        ) as number[];
 
         return new Uint8Array(val).buffer as ArrayBuffer;
     }
@@ -50,7 +53,6 @@ describe("ShioriEncodeLayer", () => {
             const requestSpy = sinon.spy(childShiori, "request");
             const request = `GET SHIORI/3.0${crlf}Charset: Shift_JIS${crlf}ID: ソビエトロシア${crlf}${crlf}`;
             const response = await shiori.request(request);
-            console.log();
             assert.deepEqual(requestSpy.firstCall.args[0], new Buffer(Encoding.convert(request, "SJIS")).buffer);
             assert(response === ChildShiori.requestString(childShiori.charset, childShiori.value));
         });

@@ -3,6 +3,7 @@
     "rules": {
         "member-access": false,
         "curly": false,
-        "interface-name": false
+        "interface-name": false,
+        "object-literal-sort-keys": false
     }
 }
