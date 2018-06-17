@@ -15,7 +15,7 @@
     "lint": "tslint -p ."
   },
   "author": "narazaka",
-  "license": "MIT",
+  "license": "Zlib",
   "devDependencies": {
     "@types/encoding-japanese": "^1.0.15",
     "@types/mocha": "^5.0.0",
