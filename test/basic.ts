@@ -21,8 +21,8 @@ class ChildShiori implements RawShiori {
     async load(_: string) { return 1; }
 
     async request(_: ArrayBuffer) {
-        const val = Encoding.convert(ChildShiori.requestString(this.charset, this.value), {to: "SJIS", from: "UNICODE", type: "array"});
-        console.error(val);
+        const val = Encoding.convert(ChildShiori.requestString(this.charset, this.value), {to: "SJIS", from: "UNICODE", type: "array"}) as number[];
+
         return new Uint8Array(val).buffer as ArrayBuffer;
     }
 
