@@ -62,8 +62,9 @@ export class ShioriEncodeLayer implements Shiori {
     private static charsetType(charset: string) {
         const lowerCharset = charset.toLowerCase();
         if (lowerCharset === "shift_jis") return "SJIS";
-        if (lowerCharset === "cp932") return "SJIS";
         if (lowerCharset === "utf-8") return "UTF8";
+        if (lowerCharset === "cp932") return "SJIS";
+        if (lowerCharset === "euc-jp") return "EUCJP";
         return "AUTO";
     }
 

@@ -7,6 +7,8 @@ const crlf = "\x0d\x0a";
 const charsets: {[name: string]: Encoding.Encoding} = {
     "CP932": "SJIS",
     "cp932": "SJIS",
+    "EUC-JP": "EUCJP",
+    "euc-jp": "EUCJP",
     "SHIFT_JIS": "SJIS",
     "Shift_JIS": "SJIS",
     "shift_jis": "SJIS",
