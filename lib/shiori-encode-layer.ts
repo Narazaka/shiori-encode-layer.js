@@ -14,22 +14,22 @@ const charsetHeaderAlphaEnd = 8; // ":"の位置
 const cr = 0x0d;
 
 export class ShioriEncodeLayer implements Shiori {
-    private static encodeRequest(content: string) {
+    static encodeRequest(content: string) {
         return ShioriEncodeLayer.encode(content, ShioriEncodeLayer.getStringCharset(content));
     }
 
-    private static decodeResponse(content: ArrayBuffer) {
+    static decodeResponse(content: ArrayBuffer) {
         return ShioriEncodeLayer.decode(content, ShioriEncodeLayer.getArrayBufferCharset(content));
     }
 
-    private static getStringCharset(content: string) {
+    static getStringCharset(content: string) {
         const charsetMatch = content.match(/Charset: ([^\x0d\x0a]+)/i);
         if (!charsetMatch) return "AUTO";
         const charset = charsetMatch[1];
         return ShioriEncodeLayer.charsetType(charset);
     }
 
-    private static getArrayBufferCharset(content: ArrayBuffer) {
+    static getArrayBufferCharset(content: ArrayBuffer) {
         const chars = new Uint8Array(content);
         let headerDetectIndex = 0;
         let charsetHeaderValueStart = -1;
