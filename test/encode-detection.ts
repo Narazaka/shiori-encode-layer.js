@@ -37,7 +37,7 @@ const hasCharsetSamples: Array<(header: string, charset: string, value: string) 
 
 const noCharsetSample = (value: string) => `GET SHIORI/3.0${crlf}Value: ${value}${crlf}${crlf}`;
 
-function convertSample(str: string, charset: Encoding.Encoding, isArraybuffer: boolean) {
+function convertSample(str: string, charset: Encoding.Encoding, isArraybuffer?: boolean) {
     if (isArraybuffer) {
         return new Uint8Array(
             Encoding.convert(str, {to: charset, from: "UNICODE", type: "array"}) as number[],
