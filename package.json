@@ -28,7 +28,7 @@
     "power-assert": "^1.6.0",
     "shioriloader": "^2.0.1",
     "shx": "^0.3.0",
-    "sinon": "^6.0.0",
+    "sinon": "^7.2.5",
     "tslint": "^5.10.0",
     "typescript": "^3.1.6"
   },
