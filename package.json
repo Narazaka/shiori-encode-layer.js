@@ -21,7 +21,7 @@
     "@types/mocha": "^5.0.0",
     "@types/node": "^10.3.3",
     "@types/power-assert": "^1.5.0",
-    "@types/sinon": "^5.0.0",
+    "@types/sinon": "^7.5.1",
     "espower-typescript": "^9.0.0",
     "mocha": "^5.0.0",
     "nyc": "^12.0.0",
