@@ -20,7 +20,7 @@
     "@types/encoding-japanese": "^1.0.15",
     "@types/mocha": "^5.0.0",
     "@types/node": "^10.3.3",
-    "@types/power-assert": "^1.5.0",
+    "@types/power-assert": "^1.5.1",
     "@types/sinon": "^5.0.0",
     "espower-typescript": "^9.0.0",
     "mocha": "^5.0.0",
